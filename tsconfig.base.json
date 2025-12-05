@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    // Strict Type-Checking (enables all strict flags)
+    "strict": true,
+
+    // Additional Safety Checks
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+
+    // Module Interop
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+
+    // Build Performance
+    "skipLibCheck": true,
+    "incremental": true,
+
+    // Code Quality
+    "forceConsistentCasingInFileNames": true,
+
+    // Emit (can be overridden per package)
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true
+  }
+}

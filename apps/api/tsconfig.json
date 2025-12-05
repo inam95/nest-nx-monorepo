@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // Node.js Environment
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "ES2023",
+    "lib": ["ES2023"],
+
+    // NestJS Decorators (required)
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    // Build Output
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "rootDir": "./",
+
+    // Node.js specific
+    "resolvePackageJsonExports": true,
+    "removeComments": true
+  },
+  "include": ["src/**/*", "test/**/*"],
+  "exclude": ["node_modules", "dist", "build", "coverage"]
+}
