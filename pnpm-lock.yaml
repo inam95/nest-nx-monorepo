@@ -42,6 +42,9 @@ importers:
 
   apps/api:
     dependencies:
+      '@nest-nx-monorepo/shared-types':
+        specifier: workspace:*
+        version: link:../../packages/shared-types
       '@nestjs/common':
         specifier: ^11.0.1
         version: 11.1.9(reflect-metadata@0.2.2)(rxjs@7.8.2)
@@ -58,9 +61,6 @@ importers:
         specifier: ^7.8.1
         version: 7.8.2
     devDependencies:
-      '@nest-nx-monorepo/shared-types':
-        specifier: workspace:*
-        version: link:../../packages/shared-types
       '@nestjs/cli':
         specifier: ^11.0.0
         version: 11.0.14(@types/node@22.19.1)
