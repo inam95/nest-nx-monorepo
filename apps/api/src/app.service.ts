@@ -1,9 +1,9 @@
-import type { CreateUserDto, User } from '@nest-nx-monorepo/shared-types';
-import { Injectable } from '@nestjs/common';
+import type { CreateUserDto, User } from "@nest-nx-monorepo/shared-types";
+import { Injectable } from "@nestjs/common";
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'Hello World!';
+    return "Hello World!";
   }
 
   createUser(user: CreateUserDto): User {
