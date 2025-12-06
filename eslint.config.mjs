@@ -1,6 +1,6 @@
 // @ts-check
 import eslint from '@eslint/js';
-import prettier, { rules } from 'eslint-config-prettier';
+import prettier from 'eslint-config-prettier';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import tseslint from 'typescript-eslint';
 
@@ -17,7 +17,13 @@ export const coreConfig = [
     },
   },
   {
-    ignores: ['**/node_modules/**', '**/dist/**', '**/build/**'],
+    ignores: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/build/**',
+      '**/eslint.config.mjs',
+      '**/prettier.config.mjs',
+    ],
   },
 ];
 

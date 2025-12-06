@@ -16,6 +16,8 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "rootDir": "./",
+    "composite": true,
+    "noEmit": true,
 
     // Node.js specific
     "resolvePackageJsonExports": true,

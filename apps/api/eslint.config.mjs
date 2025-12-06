@@ -26,7 +26,4 @@ export default [
       '@typescript-eslint/no-unsafe-argument': 'warn',
     },
   },
-  {
-    ignores: ['dist/**'],
-  },
 ];
