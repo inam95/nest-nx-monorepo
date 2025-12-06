@@ -1,0 +1,28 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "ignoreExportsUsedInFile": {
+    "interface": true,
+    "type": true
+  },
+  "tags": ["-lintignore"],
+  "workspaces": {
+    ".": {
+      "ignoreDependencies": ["concurrently"]
+    },
+    "apps/api": {
+      "entry": ["src/main.ts", "test/**/*.e2e-spec.ts"],
+      "ignoreDependencies": [
+        "@types/express",
+        "@types/supertest",
+        "supertest",
+        "ts-loader",
+        "source-map-support"
+      ]
+    },
+    "apps/web": {
+      "ignoreDependencies": ["@nest-nx-monorepo/shared-types", "postcss"]
+    },
+    "packages/shared-types": {}
+  },
+  "ignoreBinaries": ["scripts/dev.sh"]
+}
