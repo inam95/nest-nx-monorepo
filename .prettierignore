@@ -1,3 +1,16 @@
-.next
+# Dependencies
 node_modules
+
+# Build outputs
+dist
+build
+.next
+out
+
+# Generated
 public
+*.tsbuildinfo
+coverage
+
+# Lock files (optional but common)
+pnpm-lock.yaml
