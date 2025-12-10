@@ -1,7 +1,7 @@
-import globals from 'globals';
-import tseslint from 'typescript-eslint';
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
-import { coreConfig, sharedTypeScriptRules } from '../../eslint.config.mjs';
+import { coreConfig, sharedTypeScriptRules } from "../../eslint.config.mjs";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -12,18 +12,19 @@ export default [
     languageOptions: {
       globals: {
         ...globals.node,
-        ...globals.jest,
+        ...globals.jest
       },
       parserOptions: {
         projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
+        tsconfigRootDir: import.meta.dirname
+      }
+    }
   },
   {
     rules: {
-      '@typescript-eslint/no-floating-promises': 'warn',
-      '@typescript-eslint/no-unsafe-argument': 'warn',
-    },
-  },
+      "@typescript-eslint/no-floating-promises": "warn",
+      "@typescript-eslint/no-unsafe-argument": "warn",
+      "@typescript-eslint/no-unsafe-return": "off"
+    }
+  }
 ];

@@ -1,7 +1,4 @@
 {
   "files": [],
-  "references": [
-    { "path": "./apps/api" },
-    { "path": "./packages/shared-types" }
-  ]
+  "references": [{ "path": "./apps/api" }, { "path": "./packages/shared-types" }]
 }

@@ -15,8 +15,8 @@ import { AppConfigService } from "../config";
         password: config.database.password,
         database: config.database.name,
         autoLoadEntities: true,
-        synchronize: config.isDevelopment,
-        logging: config.isDevelopment
+        synchronize: config.isLocal,
+        logging: config.isLocal
       }),
       inject: [AppConfigService]
     })

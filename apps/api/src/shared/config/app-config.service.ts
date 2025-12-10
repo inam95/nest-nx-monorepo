@@ -15,6 +15,10 @@ export class AppConfigService {
     return this.configService.get("PORT", { infer: true });
   }
 
+  get frontendUrl() {
+    return this.configService.get("FRONTEND_URL", { infer: true });
+  }
+
   get database() {
     return {
       host: this.configService.get("DB_HOST", { infer: true }),
@@ -34,11 +38,11 @@ export class AppConfigService {
     };
   }
 
-  get isDevelopment() {
-    return this.nodeEnv === "development";
+  get isLocal() {
+    return this.nodeEnv === "local";
   }
 
   get isProduction() {
-    return this.nodeEnv === "production";
+    return ["production", "test", "development"].includes(this.nodeEnv);
   }
 }
