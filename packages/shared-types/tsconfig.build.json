@@ -5,7 +5,10 @@
     "rootDir": "./src",
     "noEmit": false,
     "composite": true,
-    "incremental": true
+    "incremental": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true
   },
   "include": ["src/**/*"]
 }
