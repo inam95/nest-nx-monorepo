@@ -21,7 +21,13 @@
 
     // Node.js specific
     "resolvePackageJsonExports": true,
-    "removeComments": true
+    "removeComments": true,
+
+    "paths": {
+      "@/*": ["./src/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@modules/*": ["./src/modules/*"]
+    }
   },
   "include": ["src/**/*", "test/**/*"],
   "exclude": ["node_modules", "dist", "build", "coverage"]

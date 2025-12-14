@@ -1,3 +1,4 @@
+import { Logger } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import type { NestFastifyApplication } from "@nestjs/platform-fastify";
 import { FastifyAdapter } from "@nestjs/platform-fastify";
@@ -9,6 +10,7 @@ import { AppConfigService } from "./shared/config";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
+  const logger = new Logger(bootstrap.name);
 
   const configService = app.get(AppConfigService);
   const port = configService.port;
@@ -36,6 +38,10 @@ async function bootstrap() {
 
   SwaggerModule.setup("api", app, cleanupOpenApiDoc(openApiDoc));
   await app.listen(port);
+  logger.log(`Server is running on port ${port}`);
+  if (isLocal) {
+    logger.log(`Swagger is running on http://localhost:${port}/api/docs`);
+  }
 }
 
 const configureSwagger = (app: NestFastifyApplication) => {

@@ -4,12 +4,12 @@ export abstract class BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   declare id: string;
 
-  @CreateDateColumn({ type: "timestamptz" })
+  @CreateDateColumn({ name: "created_at", type: "timestamptz" })
   declare createdAt: Date;
 
-  @UpdateDateColumn({ type: "timestamptz" })
+  @UpdateDateColumn({ name: "updated_at", type: "timestamptz" })
   declare updatedAt: Date;
 
-  @DeleteDateColumn({ type: "timestamptz" })
+  @DeleteDateColumn({ name: "deleted_at", type: "timestamptz" })
   declare deletedAt: Date;
 }

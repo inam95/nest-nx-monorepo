@@ -1,32 +1,15 @@
-import type { CursorPaginationMeta, OffsetPaginationMeta } from "../../schemas";
+import type {
+  CursorPaginatedResponse,
+  NoContentResponse,
+  OkResponse,
+  PaginatedResponse
+} from "../contracts/api-response.contract";
+import type { CursorPaginationMeta } from "../schemas/common/pagination.schema";
 
 // ──────────────────────────────────────────────
-// Types
-// ──────────────────────────────────────────────
-
-export interface OkResponse<T> {
-  success: true;
-  data: T;
-}
-
-export interface PaginatedResponse<T> {
-  success: true;
-  data: T[];
-  pagination: OffsetPaginationMeta;
-}
-
-export interface CursorPaginatedResponse<T> {
-  success: true;
-  data: T[];
-  pagination: CursorPaginationMeta;
-}
-
-export interface NoContentResponse {
-  success: true;
-}
-
-// ──────────────────────────────────────────────
-// Utility Functions
+// Response Factory Functions
+// Used by: NestJS controllers to create responses
+// Could also be used by: Next.js API routes if needed
 // ──────────────────────────────────────────────
 
 export function ok<T>(data: T): OkResponse<T> {
