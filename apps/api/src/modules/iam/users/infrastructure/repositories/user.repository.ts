@@ -37,7 +37,7 @@ export class UserRepository implements IUserRepository {
     return this.userRepository
       .createQueryBuilder("user")
       .addSelect("user.password")
-      .where("user.email = :email", { email })
+      .where("user.email = :email", { email: email.toLowerCase().trim() })
       .getOne();
   }
 

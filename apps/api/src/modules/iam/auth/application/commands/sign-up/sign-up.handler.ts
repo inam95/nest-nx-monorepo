@@ -22,7 +22,7 @@ export class SignupHandler implements ICommandHandler<SignUpCommand> {
     const existingUser = await this.userRepository.findByEmail(email);
     if (existingUser) {
       throw new ConflictException({
-        code: "USER_CONFLICT",
+        code: "USER_ALREADY_EXISTS",
         message: "User already exists",
         type: "BUSINESS"
       });

@@ -1,16 +1,15 @@
+import { type UserRole, userRoleSchema } from "@nest-nx-monorepo/shared-types";
 import { BaseEntity } from "@shared/database";
 import { Column, Entity, Index } from "typeorm";
 
-export enum UserRole {
-  BASIC = "BASIC",
-  ADMIN = "ADMIN",
-  SUPER_ADMIN = "SUPER_ADMIN"
-}
+const BASIC = userRoleSchema.enum.BASIC;
+const ADMIN = userRoleSchema.enum.ADMIN;
+const SUPER_ADMIN = userRoleSchema.enum.SUPER_ADMIN;
 
 const ROLE_HIERARCHY: Record<UserRole, number> = {
-  [UserRole.BASIC]: 1,
-  [UserRole.ADMIN]: 2,
-  [UserRole.SUPER_ADMIN]: 3
+  [BASIC]: 1,
+  [ADMIN]: 2,
+  [SUPER_ADMIN]: 3
 };
 
 @Entity("users")
@@ -28,7 +27,7 @@ export class User extends BaseEntity {
   @Column({ select: false })
   declare password: string;
 
-  @Column({ type: "enum", enum: UserRole, enumName: "user_role", default: UserRole.BASIC })
+  @Column({ type: "enum", enum: userRoleSchema.enum, enumName: "user_role", default: BASIC })
   declare role: UserRole;
 
   @Column({ name: "token_version", default: 1, type: "integer" })
@@ -49,7 +48,7 @@ export class User extends BaseEntity {
     user.password = props.password;
     user.firstName = props.firstName.trim();
     user.lastName = props.lastName.trim();
-    user.role = props.role ?? UserRole.BASIC;
+    user.role = props.role ?? BASIC;
     user.tokenVersion = 1;
     user.isEmailVerified = false;
     return user;

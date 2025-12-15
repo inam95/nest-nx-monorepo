@@ -16,8 +16,8 @@ export class RefreshTokenRepository implements IRefreshTokenRepository {
     return this.refreshTokenRepository.find({ where: { userId } });
   }
 
-  async findByHashedToken(hashedToken: string): Promise<RefreshToken | null> {
-    return this.refreshTokenRepository.findOne({ where: { hashedToken } });
+  async findByToken(token: string): Promise<RefreshToken | null> {
+    return this.refreshTokenRepository.findOne({ where: { token } });
   }
 
   create(token: Partial<RefreshToken>): RefreshToken {
@@ -48,9 +48,9 @@ export class RefreshTokenRepository implements IRefreshTokenRepository {
     await this.refreshTokenRepository.softDelete(id);
   }
 
-  async findByHashedTokenWithUser(hashedToken: string): Promise<RefreshToken | null> {
+  async findByTokenWithUser(token: string): Promise<RefreshToken | null> {
     return this.refreshTokenRepository.findOne({
-      where: { hashedToken },
+      where: { token },
       relations: ["user"]
     });
   }

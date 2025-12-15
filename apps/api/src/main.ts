@@ -1,3 +1,4 @@
+import fastifyCookie from "@fastify/cookie";
 import { Logger } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import type { NestFastifyApplication } from "@nestjs/platform-fastify";
@@ -11,6 +12,8 @@ import { AppConfigService } from "./shared/config";
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
   const logger = new Logger(bootstrap.name);
+
+  await app.register(fastifyCookie);
 
   const configService = app.get(AppConfigService);
   const port = configService.port;
@@ -49,6 +52,15 @@ const configureSwagger = (app: NestFastifyApplication) => {
     .setTitle("Nest NX Monorepo API")
     .setDescription("Nest NX Monorepo API Documentation")
     .setVersion("1.0")
+    .addCookieAuth(
+      "access_token",
+      {
+        type: "apiKey",
+        in: "cookie",
+        name: "access_token"
+      },
+      "access-token"
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

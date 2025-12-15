@@ -6,14 +6,17 @@ import { User } from "@/modules/iam/users/domain/entities/user.entity";
 @Entity("refresh_tokens")
 @Index("idx_refresh_tokens_user_id", ["userId"])
 export class RefreshToken extends BaseEntity {
-  @Column({ name: "hashed_token" })
-  declare hashedToken: string;
+  @Column({ name: "token" })
+  declare token: string;
 
   @Column({ name: "user_id", type: "uuid" })
   declare userId: string;
 
   @Column({ name: "expires_at", type: "timestamptz" })
   declare expiresAt: Date;
+
+  @Column({ name: "revoked_at", type: "timestamptz", nullable: true })
+  declare revokedAt: Date | null;
 
   @Column({ name: "user_agent", nullable: true, type: "varchar" })
   declare userAgent: string | null;
@@ -29,18 +32,19 @@ export class RefreshToken extends BaseEntity {
   declare user: User;
 
   static create(props: {
-    hashedToken: string;
+    token: string;
     userId: string;
     expiresAt: Date;
     userAgent?: string | null;
     ipAddress?: string | null;
   }): RefreshToken {
     const token = new RefreshToken();
-    token.hashedToken = props.hashedToken;
+    token.token = props.token;
     token.userId = props.userId;
     token.expiresAt = props.expiresAt;
     token.userAgent = props.userAgent ?? null;
     token.ipAddress = props.ipAddress ?? null;
+    token.revokedAt = null;
     token.lastUsedAt = null;
     return token;
   }
@@ -49,20 +53,19 @@ export class RefreshToken extends BaseEntity {
     return new Date() > this.expiresAt;
   }
 
-  get expiresInMs(): number {
-    return Math.max(0, this.expiresAt.getTime() - Date.now());
+  get isRevoked(): boolean {
+    return this.revokedAt !== null;
   }
 
-  get expiresInSeconds(): number {
-    return Math.floor(this.expiresInMs / 1000);
+  get isValid(): boolean {
+    return !this.isExpired && !this.isRevoked;
   }
 
-  touchLastUsed(): void {
+  revoke(): void {
+    this.revokedAt = new Date();
+  }
+
+  updateLastUsed(): void {
     this.lastUsedAt = new Date();
-  }
-
-  wasUsedWithin(ms: number): boolean {
-    if (!this.lastUsedAt) return false;
-    return Date.now() - this.lastUsedAt.getTime() < ms;
   }
 }

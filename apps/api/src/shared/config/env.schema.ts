@@ -11,10 +11,13 @@ export const envSchema = z.object({
   DB_PASSWORD: z.string(),
   DB_NAME: z.string(),
 
-  JWT_ACCESS_SECRET: z.string().min(32),
-  JWT_REFRESH_SECRET: z.string().min(32),
+  JWT_SECRET: z.string().min(32),
   JWT_ACCESS_EXPIRES_IN: z.string().default("15m"),
-  JWT_REFRESH_EXPIRES_IN: z.string().default("7d")
+  JWT_REFRESH_EXPIRES_IN: z.string().default("7d"),
+
+  COOKIE_DOMAIN: z.string().optional(),
+  COOKIE_SECURE: z.coerce.boolean().default(true),
+  COOKIE_SAME_SITE: z.enum(["lax", "strict", "none"]).default("lax")
 });
 
 export type TEnv = z.infer<typeof envSchema>;

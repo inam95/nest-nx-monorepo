@@ -31,10 +31,17 @@ export class AppConfigService {
 
   get jwt() {
     return {
-      accessSecret: this.configService.get("JWT_ACCESS_SECRET", { infer: true }),
-      refreshSecret: this.configService.get("JWT_REFRESH_SECRET", { infer: true }),
+      jwtSecret: this.configService.get("JWT_SECRET", { infer: true }),
       accessExpiresIn: this.configService.get("JWT_ACCESS_EXPIRES_IN", { infer: true }),
       refreshExpiresIn: this.configService.get("JWT_REFRESH_EXPIRES_IN", { infer: true })
+    };
+  }
+
+  get cookie() {
+    return {
+      domain: this.configService.get("COOKIE_DOMAIN", { infer: true }),
+      secure: this.configService.get("COOKIE_SECURE", { infer: true }),
+      sameSite: this.configService.get("COOKIE_SAME_SITE", { infer: true })
     };
   }
 

@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { userSchema } from "./user.schema";
+
 // ──────────────────────────────────────────────
 // Request Schema
 // ──────────────────────────────────────────────
@@ -13,15 +15,7 @@ export const signInRequestSchema = z.object({
 // Response Schema (just the data, not wrapped)
 // ──────────────────────────────────────────────
 
-export const signInDataSchema = z.object({
-  user: z.object({
-    id: z.uuid(),
-    email: z.email(),
-    firstName: z.string(),
-    lastName: z.string(),
-    role: z.enum(["L1_BASIC", "L2_ADMIN", "L3_SUPER_ADMIN"])
-  })
-});
+export const signInDataSchema = userSchema;
 
 // ──────────────────────────────────────────────
 // Inferred Types
